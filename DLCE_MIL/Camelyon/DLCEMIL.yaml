@@ -1,0 +1,67 @@
+General:
+    comment: ""
+    seed: 2021
+    fp16: True
+    amp_level: O2
+    precision: 16
+    multi_gpu_mode: dp
+    gpus: [0]
+    epochs: &epoch 200
+    grad_acc: 2
+    frozen_bn: False
+    patience: 10
+    server: test
+    log_path: logs/
+
+Data:
+    dataset_name: camel_data
+    data_shuffle: False
+    data_dir: 
+    train_dir: 
+   
+    val_dir: 
+    label_dir: 
+    bag_size: 64
+   
+    
+    fold: 
+    nfold: 
+
+    train_dataloader:
+        batch_size: 1
+        num_workers: 8
+
+    test_dataloader:
+        batch_size: 1
+        num_workers: 8
+
+Model:
+    name: dice
+    n_classes: 2
+    in_dim: 384
+    project_dim: 512
+    depth_abs_max: 800.0
+    bin_size_um: 5
+    max_rel_um: 200
+    bias_init: 0.0
+    use_depth: true 
+    use_adapter: false
+    use_sim_refiner: false
+    use_1dconv: True
+    use_ppeg: true 
+    use_local: true
+    norm: gn
+    adapter_dropout: 0.5
+    conv_norm: gn
+    conv_dropout: 0.1
+
+Optimizer:
+    opt: lookahead_radam
+    lr: 0.0002
+    opt_eps: null
+    opt_betas: null
+    momentum: null
+    weight_decay: 0.001
+
+Loss:
+    base_loss: CrossEntropyLoss
